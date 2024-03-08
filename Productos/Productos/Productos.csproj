@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapperProfiles\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Productos.Application\Productos.Application.csproj" />
+    <ProjectReference Include="..\Productos.Domain\Productos.Domain.csproj" />
+    <ProjectReference Include="..\Productos.Infrastructure\Productos.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
