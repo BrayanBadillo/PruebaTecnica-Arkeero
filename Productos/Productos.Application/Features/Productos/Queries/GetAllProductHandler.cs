@@ -8,6 +8,6 @@ public class GetAllProductHandler( IProductoService productoService ) : IRequest
 {
     public async Task<ICollection<Product>> Handle( GetAllProductsQueries request, CancellationToken cancellationToken )
     {
-        return  productoService.GetProductsAsync();
+        return productoService.GetProductsAsync();
     }
 }

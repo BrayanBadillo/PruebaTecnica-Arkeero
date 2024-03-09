@@ -23,6 +23,7 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(Program
 builder.Services.AddAutoMapper(Assembly.Load("Productos.Application"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductoService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

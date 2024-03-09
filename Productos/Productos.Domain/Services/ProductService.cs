@@ -7,11 +7,11 @@ public class ProductService( IUnitOfWork unitOfWork ) : IProductoService
 {
     public async Task<bool> CreateProductoAsync( Product product )
     {
-        return await unitOfWork.product.CreateProductAsync(product);
+        return await unitOfWork.product.CreateAsync(product);
     }
 
     public ICollection<Product> GetProductsAsync()
     {
-        return [.. ( unitOfWork.product.GetAllProductsAsync())];
+        return [.. ( unitOfWork.product.GetAllAsync())];
     }
 }

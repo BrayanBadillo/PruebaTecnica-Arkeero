@@ -28,6 +28,9 @@ body {
     --bh-body-font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    font-family: var(--bh-body-font-family)
+}
 
 .header {
     z-index: 2;
@@ -84,6 +87,17 @@ body {
     border-top: 1px solid var(--primary-color-highlight);
 }
 
-.footer{
+.footer {
     z-index: 3;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .nav {
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan en tamaños de pantalla pequeños */
+}
+
+.footer .nav .nav-item {
+    margin-right: 15px; /* Espacio entre los íconos de redes sociales */
 }

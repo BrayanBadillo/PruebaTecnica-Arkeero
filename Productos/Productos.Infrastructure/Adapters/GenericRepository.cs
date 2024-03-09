@@ -13,15 +13,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _context = Context;
     }
 
-    public async Task<bool> CreateProductAsync( T value )
+    public async Task<bool> CreateAsync( T value )
     {
         EntityEntry<T>? result = await _context.Set<T>().AddAsync(value);
         return result is null ? false : true;
     }
 
-    public async Task<bool> DeleteProductAsync( int id )
+    public async Task<bool> DeleteAsync( int id )
     {
-        T? entity = await GetProductByIdAsync(id);
+        T? entity = await GetByIdAsync(id);
         if ( entity == null )
         {
             return false;
@@ -30,17 +30,17 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return true;
     }
 
-    public IQueryable<T> GetAllProductsAsync()
+    public IQueryable<T> GetAllAsync()
     {
         return _context.Set<T>();
     }
 
-    public async Task<T?> GetProductByIdAsync( int id )
+    public async Task<T?> GetByIdAsync( int id )
     {
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public bool UpdateProduct( T value )
+    public bool Update( T value )
     {
         EntityEntry<T>? result = _context.Set<T>().Update(value);
         return result is null ? false : true;

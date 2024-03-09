@@ -2,13 +2,13 @@
 
 public interface IGenericRepository<T> where T : class
 {
-    Task<bool> CreateProductAsync( T value );
+    Task<bool> CreateAsync( T value );
 
-    Task<T?> GetProductByIdAsync( int id );
+    Task<T?> GetByIdAsync( int id );
 
-    IQueryable<T> GetAllProductsAsync();
+    IQueryable<T> GetAllAsync();
 
-    bool UpdateProduct( T value );
+    bool Update( T value );
 
-    Task<bool> DeleteProductAsync( int id );
+    Task<bool> DeleteAsync( int id );
 }
