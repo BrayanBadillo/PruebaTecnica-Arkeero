@@ -8,6 +8,8 @@ public class CategoryProfile : Profile
 {
     public CategoryProfile()
     {
-        CreateMap<CreateCategoryCommands, Category>().ReverseMap();
+        CreateMap<CreateCategoryCommand, Category>().ReverseMap();
+        CreateMap<DeleteCategoryCommand, Category>().ReverseMap();
+        CreateMap<UpdateCategoryCommand, Category>().ReverseMap();
     }
 }

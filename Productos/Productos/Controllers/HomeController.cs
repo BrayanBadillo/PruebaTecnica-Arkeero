@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+
 namespace Productos.Controllers
 {
     public class HomeController : Controller
@@ -14,7 +15,5 @@ namespace Productos.Controllers
         {
             return View();
         }
-
-
     }
 }

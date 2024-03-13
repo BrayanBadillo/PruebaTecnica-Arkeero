@@ -8,7 +8,7 @@ using Productos.Infrastructure.Data;
 
 #nullable disable
 
-namespace Productos.Migrations
+namespace Productos.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -222,7 +222,7 @@ namespace Productos.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Productos.Models.Category", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,9 +237,21 @@ namespace Productos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Herramientas Electricas"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Herramientas Manuales"
+                        });
                 });
 
-            modelBuilder.Entity("Productos.Models.Product", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,36 +285,28 @@ namespace Productos.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
 
-            modelBuilder.Entity("Productos.Models.ProductDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductDetails");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 3, 11, 12, 54, 15, 693, DateTimeKind.Utc).AddTicks(7886),
+                            Description = "Taladro de 500W de 1/2\" con velocidad variable de 0 - 3000 RPM, incluye Mango, Guía y llave para sacar broca, Tutoriales sobre el buen uso de la herramienta. ",
+                            Name = "Taladro 1/2 500W Beta",
+                            Price = 139500m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 3, 11, 12, 54, 15, 693, DateTimeKind.Utc).AddTicks(7890),
+                            Description = "Taladro de 420W de 1/4\" con velocidad variable de 0 - 4200 RPM, incluye Catálogo, Llave para mandril. Tutoriales sobre el buen uso de la herramienta. ",
+                            Name = "Taladro 1/4 420W Avinci",
+                            Price = 122100m,
+                            Quantity = 5
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -356,9 +360,9 @@ namespace Productos.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Productos.Models.Product", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Productos.Models.Category", "Category")
+                    b.HasOne("Productos.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -367,25 +371,9 @@ namespace Productos.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Productos.Models.ProductDetail", b =>
-                {
-                    b.HasOne("Productos.Models.Product", "Product")
-                        .WithMany("Details")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Productos.Models.Category", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Productos.Models.Product", b =>
-                {
-                    b.Navigation("Details");
                 });
 #pragma warning restore 612, 618
         }

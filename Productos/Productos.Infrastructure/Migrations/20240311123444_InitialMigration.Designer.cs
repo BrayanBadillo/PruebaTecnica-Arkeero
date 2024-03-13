@@ -9,11 +9,11 @@ using Productos.Infrastructure.Data;
 
 #nullable disable
 
-namespace Productos.Migrations
+namespace Productos.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240307032029_CreateEntities")]
-    partial class CreateEntities
+    [Migration("20240311123444_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,7 +225,7 @@ namespace Productos.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Productos.Models.Category", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,7 +242,7 @@ namespace Productos.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Productos.Models.Product", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,36 +276,6 @@ namespace Productos.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Productos.Models.ProductDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -359,9 +329,9 @@ namespace Productos.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Productos.Models.Product", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Productos.Models.Category", "Category")
+                    b.HasOne("Productos.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,25 +340,9 @@ namespace Productos.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Productos.Models.ProductDetail", b =>
-                {
-                    b.HasOne("Productos.Models.Product", "Product")
-                        .WithMany("Details")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Productos.Models.Category", b =>
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Productos.Models.Product", b =>
-                {
-                    b.Navigation("Details");
                 });
 #pragma warning restore 612, 618
         }

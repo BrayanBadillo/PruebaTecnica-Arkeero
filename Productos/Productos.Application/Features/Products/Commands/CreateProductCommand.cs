@@ -1,10 +1,9 @@
 ﻿using MediatR;
 
-namespace Productos.Application.Features.Productos.Commands;
+namespace Productos.Application.Features.Products.Commands;
 
-public record CreateProductoCommands( string Name,
+public record CreateProductCommand( string Name,
                                 string Description,
                                 decimal Price,
                                 int Quantity,
-                                DateTime CreatedAt,
                                 int CategoryId ) : IRequest<bool>;

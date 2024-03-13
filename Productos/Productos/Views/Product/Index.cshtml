@@ -5,70 +5,81 @@
 }
 
 <div class="hero">
-    <div class="content h-75 container-custom position-relative mt-3">
-        <div class="container">
-            <h1 class="text-white text-center mt-5">PRODUCTS</h1>
-            <div class="row">
-                <div class="col align-items-end text-end my-4 ">
-                    <a class="btn btn-outline-success navbar-toggler justify-content-end" asp-area="" asp-controller="Product" asp-action="Index">
-                        <i class="bi bi-patch-plus"> Add Product</i>
-                    </a>
+    <div class="hero__over"></div>
+    <img class="hero__img" src="/img/img3.jpg" />
+    <div class="hero__content h-100 container-custom position-relative ">
+        <div class="row justify-content-center align-content-center hero__content-width">
+            <div class="d-flex flex-row justify-content-center align-content-center">
+                <h1 class="fw-bold mb-4 text-white">Our Products</h1>
+            </div>
+            <div class="d-flex flex-row justify-content-end align-content-center">
+                <button class="bi bi-patch-plus btn btn-outline-success navbar-toggler justify-content-end" id="btnOpenModal"> Add Product</button>
+            </div>
+            <div class="row d-flex mt-3 w-100">
+                <div class="text-center w-100">
+                    <table class="table table-striped mt-3" id="table-products">
+                        <thead class="thead-table text-white">
+                            <tr>
+                                <th>CreatAt</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Category</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-body text-white">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-        <div class="row">
-
-            <table class="table-responsive mt-3 table-bordered" style="overflow-x auto;">
-                <thead class="thead-table text-white text-center">
-                    <tr>
-                        <th>CreatAt</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ( Model.Count == 0 )
-                    {
-                        <tr>
-                            <td colspan="6" class="text-center">No Products found!</td>
-                        </tr>
-
-                    }
-                    else
-                    {
-                        @foreach ( var item in Model )
-                        {
-                            <tr>
-
-                                <td>@item.CreatedAt</td>
-                                <td>@item.Name</td>
-                                <td>@item.Description</td>
-                                <td>@item.Price</td>
-                                <td>@item.Quantity</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a class=" px-2 py-1 btn btn-outline-warning mx-1" asp-action="Edit" asp-route-id="">
-                                            <i class="bi bi-edit ms-1 mt-1"></i>
-                                        </a>
-
-                                        <a class=" px-2 py-1 btn btn-outline-danger mx-1" asp-action="Delete" asp-route-id="">
-                                            <i class="bi bi-trash m-1"></i>
-                                        </a>
-                                        <a class=" px-2 py-1 btn btn-outline-info mx-1" asp-action="Details" asp-route-id="">
-                                            <i class="bi bi-three-dots m-1"></i>
-                                        </a>
-
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
 
+
+<!-- Modal Products-->
+<form id="createForm">
+    <div class="modal fade" id="modalProducts" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="txtName" autocomplete="off" placeholder="Please Enter The Product Name!">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="txtDescription" autocomplete="off" placeholder="Please Enter The Product Description!"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" class="form-control" id="txtPrice" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="txtQuantity" autocomplete="off">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select" id="listCategories"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger bi-x-square" data-bs-dismiss="modal"> Close</button>
+                    <button type="submit" class="btn btn-primary bi bi-floppy2-fill" id="btn-saveChangesProducts"> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}

@@ -9,5 +9,5 @@ public class Category
     [Required(ErrorMessage = "The Name Category Is Required!")]
     public string Name { get; set; } = null!;
 
-    public ICollection<Product> Products { get; set; }
+    public ICollection<Product>? Products { get; set; }
 }

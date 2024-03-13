@@ -50,35 +50,8 @@
 
 ## Solucion
 ## Sección 1: Desarrollo de Código
-### Arquitectura MVC
-![Arquitectura Implementada](./img/ArquitecturaMVC.png)
+[Documentacion del Proyecto ](./Document.md)
 
-
-### Estructura del proyecto
-```
-Productos/
-  |- Controllers/
-  |   |- HomeController.cs
-  |   |- ProductController.cs
-  |- Models/
-  |  |- Entities/
-  |  |- ViewModels/
-  |- Repositories/
-  |  |- IProductRepository.cs
-  |  |- ProductRepository,cs
-  |- Services/
-  |  |- IMediator.cs
-  |  |- Mediator.cs
-  |- Views/
-  |  |- Home/
-  |  |- Product/
-  |  |- Shared/
-  |- AutoMapperProfiles/
-  |- Data/
-  |  |- ApplicationDbContext.cs
-  |- Migrations/
-  |- Program.cs
-```
 ### Sección 3: Preguntas de Concepto
 #### ¿Qué es el patrón repositorio y cuál es su utilidad en el desarrollo de software?
 

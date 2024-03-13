@@ -21,8 +21,8 @@
             <a class="text-decoration-none text-white fs-1 fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Product Manager</a>
 
             <div>
-                <a class="btn button navbar-toggler text-white" asp-area="" asp-controller="Category" asp-action="Index">
-                    <i class="bi bi-table mx-2"> Categories</i>
+                <a class="btn button navbar-toggler text-white mx-3 text-center" asp-area="" asp-controller="Category" asp-action="Index">
+                    <i class="bi bi-table"> Categories</i>
                 </a>
             </div>
 
@@ -30,10 +30,8 @@
         </div>
     </header>
 
-    <main style="margin-top: 50px; margin-bottom:30px">
-        <div class="container-fluid pt-4">
-            @RenderBody()
-        </div>
+    <main role="main">
+        @RenderBody()
     </main>
 
     <footer class="footer bg-dark text-white">
@@ -51,10 +49,12 @@
             </ul>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

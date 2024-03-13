@@ -9,11 +9,11 @@ using Productos.Infrastructure.Data;
 
 #nullable disable
 
-namespace Productos.Migrations
+namespace Productos.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240306205907_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240311125417_InsertDataSeed")]
+    partial class InsertDataSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,6 +225,93 @@ namespace Productos.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Herramientas Electricas"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Herramientas Manuales"
+                        });
+                });
+
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 3, 11, 12, 54, 15, 693, DateTimeKind.Utc).AddTicks(7886),
+                            Description = "Taladro de 500W de 1/2\" con velocidad variable de 0 - 3000 RPM, incluye Mango, Guía y llave para sacar broca, Tutoriales sobre el buen uso de la herramienta. ",
+                            Name = "Taladro 1/2 500W Beta",
+                            Price = 139500m,
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2024, 3, 11, 12, 54, 15, 693, DateTimeKind.Utc).AddTicks(7890),
+                            Description = "Taladro de 420W de 1/4\" con velocidad variable de 0 - 4200 RPM, incluye Catálogo, Llave para mandril. Tutoriales sobre el buen uso de la herramienta. ",
+                            Name = "Taladro 1/4 420W Avinci",
+                            Price = 122100m,
+                            Quantity = 5
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -274,6 +361,22 @@ namespace Productos.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Productos.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Productos.Domain.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Productos.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

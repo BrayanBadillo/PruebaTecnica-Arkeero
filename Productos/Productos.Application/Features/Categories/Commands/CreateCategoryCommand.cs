@@ -2,4 +2,4 @@
 
 namespace Productos.Application.Features.Categories.Commands;
 
-public record CreateCategoryCommands( string name ) : IRequest<bool>;
+public record CreateCategoryCommand( string name ) : IRequest<bool>;

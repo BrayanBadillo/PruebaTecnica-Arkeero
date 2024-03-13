@@ -4,9 +4,7 @@
     {
         IProductRepository product { get; }
         ICategoryRepository category { get; }
-        IProductDetailsRepository productDetails { get; }
 
         Task SaveAsync();
-
     }
 }
